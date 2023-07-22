@@ -1,0 +1,2 @@
+pyowm
+streamlit>=1.22
