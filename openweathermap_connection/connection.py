@@ -1,20 +1,17 @@
 from streamlit.connections import ExperimentalBaseConnection
 from streamlit.runtime.caching import cache_data
-
+import streamlit as st
 import pyowm
 import pandas as pd
 
 class OpenWeatherMapConnection(ExperimentalBaseConnection[pyowm.owm.OWM]):
-    """streamlit connection to OpenWeatherMap OneCall API"""
+    """streamlit connection to OpenWeatherMap APIs"""
 
-    def _connect(self, **kwargs) -> pyowm.owm.OMW:
-        if 'owm_api_key' in kwargs:
-            owm_api_key = kwargs.pop('owm_api_key')
-        else:
-            owm_api_key = self._secrets['owm_api_key']
+    def _connect(self, **kwargs) -> pyowm.owm.OWM:
+        owm_api_key = st.secrets.owm_api_key
         return pyowm.owm.OWM(owm_api_key)
     
-    def agro_manager(self) -> pyowm.agro10.agro_manager.AgroManager: 
+    def agro_manager(self) -> pyowm.agroapi10.agro_manager.AgroManager: 
         """
         Gives a `pyowm.agro10.agro_manager.AgroManager` instance that can be used to read/write data from the
         Agricultural API.
@@ -44,6 +41,14 @@ class OpenWeatherMapConnection(ExperimentalBaseConnection[pyowm.owm.OWM]):
         :returns: a *CityIDRegistry* instance
         """
         return self._instance.city_id_registry()
+
+    def geocoding_manager(self) -> pyowm.geocodingapi10.geocoding_manager.GeocodingManager:
+        """
+        Gives a `pyowm.geocoding10.geocoding_manager.GeocodingManager` instance that can be used to perform direct
+        and reverse geocoding
+        :return: a `pyowm.geocoding10.geocoding_manager.GeocodingManager` instance
+        """
+        return self._instance.geocoding_manager()
 
     def stations_manager(self) -> pyowm.stationsapi30.stations_manager.StationsManager:
         """
@@ -76,10 +81,4 @@ class OpenWeatherMapConnection(ExperimentalBaseConnection[pyowm.owm.OWM]):
         """
         return self._instance.weather_manager()
 
-    def geocoding_manager(self) -> pyowm.geocoding10.geocoding_manager.GeocodingManager:
-        """
-        Gives a `pyowm.geocoding10.geocoding_manager.GeocodingManager` instance that can be used to perform direct
-        and reverse geocoding
-        :return: a `pyowm.geocoding10.geocoding_manager.GeocodingManager` instance
-        """
-        return self._instance.geocoding_manager()
+
