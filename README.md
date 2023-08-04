@@ -1,8 +1,13 @@
 #### Streamlit OpenWeatherMap Connector
 
-This connects to the OpenWeatherMap API using the [PyOWM](https://pyowm.readthedocs.io/en/latest/) package.
+The demo app shows how easy it is to connect to OpenWeatherMap's API using Streamlit's `experimental_connection`. This feature streamlines the handling of secrets and other repetitive code often reused to connect to the OpenWeatherMap API.
 
-There are 2 types of connections created from Streamlit's [ExperimentalBaseConnection](https://docs.streamlit.io/library/api-reference/connections/st.connections.experimentalbaseconnection). 
+In a  `.streamlit/secrets.toml` file, you'll need to provide the api key as follows:
+```
+owm_api_key = "____"
+```
+
+This repo contains 2 types of connections created from Streamlit's [ExperimentalBaseConnection](https://docs.streamlit.io/library/api-reference/connections/st.connections.experimentalbaseconnection). They access the OpenWeatherMap API using the [PyOWM](https://pyowm.readthedocs.io/en/latest/) package.
 
 The first connection returns an OWM object.
 Example usage:
