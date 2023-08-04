@@ -1,8 +1,8 @@
 #### Streamlit OpenWeatherMap Connector
 
-The demo app shows how easy it is to connect to OpenWeatherMap's API using Streamlit's `experimental_connection`. This feature streamlines the handling of secrets and other repetitive code often reused to connect to the OpenWeatherMap API.
+The demo app shows how easy it is to connect to OpenWeatherMap's API using Streamlit's `experimental_connection`. This feature streamlines the handling of secrets and other repetitive code often reused to connect to the OpenWeatherMap API. See the app [here](https://app-openweathermap-connector-df6bhfemyu8vhwsawkgwm9.streamlit.app/).
 
-In a  `.streamlit/secrets.toml` file, you'll need to provide the api key as follows:
+To run it locally: in a  `.streamlit/secrets.toml` file, you'll need to provide the api key as follows:
 ```
 owm_api_key = "____"
 ```
